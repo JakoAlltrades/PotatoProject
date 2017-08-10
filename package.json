@@ -18,5 +18,14 @@
   "bugs": {
     "url": "https://github.com/JakoAlltrades/PotatoProject/issues"
   },
-  "homepage": "https://github.com/JakoAlltrades/PotatoProject#readme"
+  "homepage": "https://github.com/JakoAlltrades/PotatoProject#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "mongoose": "^4.11.6",
+    "pug": "^2.0.0-rc.3"
+  }
 }
