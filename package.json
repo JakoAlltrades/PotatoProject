@@ -1,0 +1,22 @@
+{
+  "name": "potatoproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JakoAlltrades/PotatoProject.git"
+  },
+  "keywords": [
+    "potato"
+  ],
+  "author": "MBJ",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JakoAlltrades/PotatoProject/issues"
+  },
+  "homepage": "https://github.com/JakoAlltrades/PotatoProject#readme"
+}
