@@ -1,0 +1,7 @@
+{
+	"nav": [
+        ["Home", "/"],
+        ["Sign Up", "signup"],
+        ["Admin", "admin"]
+    ]
+}
