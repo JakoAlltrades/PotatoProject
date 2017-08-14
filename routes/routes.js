@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/data');
+var bcrypt = require('bcrypt-nodejs');
+var hash;
 
 var mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, 'connection error:'));
@@ -14,4 +16,76 @@ var userSchema = mongoose.Schema({
     isAdmin: Boolean
 });
 
-var user = mongoose.model('User_Collection', userSchema);
+function makeHash(the_str) {
+    bcrypt.hash(the_str, null, null, function(err, hash){
+        showHash(hash);
+        bcrypt.compare("bacon", hash, function(err, res){
+            console.log(res);
+        });
+        bcrypt.compare("veggies", hash, function(err, res){
+            console.log(res);
+        });//how to compare back to the orignal unsalted string
+    });
+    
+}
+
+
+var User = mongoose.model('User_Collection', userSchema);
+
+exports.index = function (req,res){
+    User.find(function(err, person){
+        if(err) return console.error(err);
+        res.render('index', {
+            title: "User Home",
+            user: person
+        });
+    });
+};
+
+exports.create = function (req, res) {
+  res.render('create', {
+      title: 'Create User'
+  });
+};
+
+exports.createUser = function (req, res) {
+  var user = new Person({
+    userName: req.body.userName,
+    password: makeHash(req.body.password),
+    email: req.body.email,
+    age: req.body.age,
+    isAdmin: req.body.isAdmin
+  });
+  user.save(function (err, user) {
+    if (err) return console.error(err);
+    console.log(req.body.userName + ' added');
+  });
+  res.redirect('/');
+};
+
+exports.edit = function (req, res) {
+  User.findById(req.params.id, function (err, user) {
+    if (err) return console.error(err);
+    res.render('edit', {
+      title: 'Edit User',
+      user: user
+    });
+  });
+};
+
+exports.editUser = function (req, res) {
+  User.findById(req.params.id, function (err, user) {
+    if (err) return console.error(err);
+    user.userName = req.body.userName;
+    user.password = req.body.password;//compare to the hashed value
+    user.email = req.body.email;
+    user.age = req.body.age;
+    user.isAdmin = req.body.isAdmin;
+    person.save(function (err, person) {
+      if (err) return console.error(err);
+      console.log(req.body.name + ' updated');
+    });
+  });
+  res.redirect('/');
+
+};
