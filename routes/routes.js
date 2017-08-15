@@ -18,17 +18,19 @@ var userSchema = mongoose.Schema({
 
 function makeHash(the_str) {
     bcrypt.hash(the_str, null, null, function(err, hash){
-        showHash(hash);
-        bcrypt.compare("bacon", hash, function(err, res){
-            console.log(res);
-        });
-        bcrypt.compare("veggies", hash, function(err, res){
-            console.log(res);
-        });//how to compare back to the orignal unsalted string
+        
+        //how to compare back to the orignal unsalted string
     });
-    
+    return hash;  
 }
 
+function compareHash(the_str, passHash)
+{
+bcrypt.compare(the_str, passash, function(err, res){
+        return res;
+        //how to compare back to the orignal unsalted string
+    });  
+}
 
 var User = mongoose.model('User_Collection', userSchema);
 
