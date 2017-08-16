@@ -13,12 +13,12 @@ var userSchema = mongoose.Schema({
     password: String,
     email: String,
     age: Number,
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    userAnswer: [String]
 });
 
 function makeHash(the_str) {
     bcrypt.hash(the_str, null, null, function(err, hash){
-        
         //how to compare back to the orignal unsalted string
     });
     return hash;  
@@ -26,7 +26,7 @@ function makeHash(the_str) {
 
 function compareHash(the_str, passHash)
 {
-bcrypt.compare(the_str, passash, function(err, res){
+    bcrypt.compare(the_str, passash, function(err, res){
         return res;
         //how to compare back to the orignal unsalted string
     });  
@@ -38,11 +38,20 @@ exports.index = function (req,res){
     User.find(function(err, person){
         if(err) return console.error(err);
         res.render('index', {
-            title: "User Home",
-            user: person
+            title: "Sign in"
         });
     });
 };
+
+exports.signInPost = function(req,res)
+{
+    var userName = req.body.userName;
+    var password = req.body.password;
+    User.findById(req.params.id, function(err, user){
+        if(err) return console.error(err);
+        res.render('details', {title: "Details"});
+    })
+}
 
 exports.create = function (req, res) {
   res.render('create', {
@@ -51,7 +60,7 @@ exports.create = function (req, res) {
 };
 
 exports.createUser = function (req, res) {
-  var user = new Person({
+  var user = new User({
     userName: req.body.userName,
     password: makeHash(req.body.password),
     email: req.body.email,
@@ -79,7 +88,7 @@ exports.editUser = function (req, res) {
   User.findById(req.params.id, function (err, user) {
     if (err) return console.error(err);
     user.userName = req.body.userName;
-    user.password = req.body.password;//compare to the hashed value
+    user.password = makeHash(req.body.password);
     user.email = req.body.email;
     user.age = req.body.age;
     user.isAdmin = req.body.isAdmin;
