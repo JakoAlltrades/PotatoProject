@@ -20,7 +20,7 @@ var urlencodedParser = bodyParser.urlencoded({
 app.get('/', route.index);
 app.get('/create', route.create);
 app.get('/edit/:id', route.edit);
-app.get('/details/:id', route.details);
+//app.get('/details/:id', route.details);
 app.post('/create', urlencodedParser, route.creatUser);
 app.post('/edit/:id', urlencodedParser, route.editUser);
 app.get('/delete/:id', route.delete);
