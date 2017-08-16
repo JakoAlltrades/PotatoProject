@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  table(class='gridtable')
+    tr
+      th Id
+      th Name
+      th Age
+      th 
+      th 
+    each item in people
+      tr
+        td
+          a(href='/details/' + item.id) #{item.id}
+        td #{item.name}
+        td #{item.age}
+        td
+          a(href='/edit/' + item.id) Edit
+        td
+          a(href='/delete/' + item.id) Delete
+
+  p
+  #menu
+    a(href='/create') Add new person
