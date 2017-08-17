@@ -79,7 +79,7 @@ exports.createUser = function (req, res) {
     if (err) return console.error(err);
     console.log(req.body.userName + ' added');
   });
-  res.redirect('/');
+  res.redirect('details', {title: "Details"});
 };
 
 exports.edit = function (req, res) {
