@@ -1,4 +1,3 @@
-
 *.wt
 data/WiredTiger.lock
 *.turtle
@@ -9,4 +8,3 @@ data/mongod.lock
 *.2017-08-16T14-33-45Z-00000
 data/journal/WiredTigerPreplog.0000000002
 data/
-
