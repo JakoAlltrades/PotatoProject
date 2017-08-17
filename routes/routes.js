@@ -109,7 +109,7 @@ exports.editUser = function (req, res) {
 
 };
 
-exports.details function(req, res)
+exports.details = function(req, res)
 {
     
 };
