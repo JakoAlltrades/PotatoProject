@@ -1,6 +1,7 @@
 extends layout
 
 block content
+	div(id='signin')
 	form(id='form', method='post', action='/')
 		label(for='userName') UserName: 
 		input(type='text', name='name')
@@ -9,7 +10,6 @@ block content
 		input(type='text', name='password')
 		br
 		input(type='submit', value='Add Person')
-		canvas(id="canvasId")
-    	script(src="barGraph.js")
-div(id="signup")
-	a(src="/signup")
+		div(id="signup")
+		h1
+		a(href="/create") Sign Up
