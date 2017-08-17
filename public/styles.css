@@ -1,9 +1,16 @@
 #signup{
 	margin-left: auto;
 	margin-right: auto;
-	float:right;
 }
 #signin{
+	width: 300px;
+	height: 400px;
 	margin-left: auto;
 	margin-right: auto;
+}
+#signin h1{
+	text-align: center;
+}
+#SignIn{
+	text-align: center;
 }
