@@ -51,7 +51,13 @@ exports.signInPost = function(req,res)
     var password = req.body.password;
     User.findById(req.params.id, function(err, user){
         if(err) return console.error(err);
-        res.render('details', {title: "Details"});
+        if(user.userName.equals(userName))
+            {
+                if(compareHash(password, user.password))
+                    {
+                        res.render('details', {title: "Details"});
+                    }
+            }
     })
 }
 
@@ -73,7 +79,7 @@ exports.createUser = function (req, res) {
     if (err) return console.error(err);
     console.log(req.body.userName + ' added');
   });
-  res.redirect('/');
+  res.redirect('details', {title: "Details"});
 };
 
 exports.edit = function (req, res) {
@@ -101,4 +107,9 @@ exports.editUser = function (req, res) {
   });
   res.redirect('/');
 
+};
+
+exports.details = function(req, res)
+{
+    
 };
