@@ -13,3 +13,4 @@ data/
 *.lock
 journal/WiredTigerPreplog.0000000002
 *.2017-08-17T14-03-47Z-00000
+*.interim

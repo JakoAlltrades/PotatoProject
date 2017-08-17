@@ -1,15 +1,16 @@
 extends layout
 
 block content
+	div(id="signup")
+			h1
+				a(href="/create") Sign In
 	div(id='signin')
-	form(id='form', method='post', action='/')
-		label(for='userName') UserName: 
-		input(type='text', name='name')
-		br
-		label(for='password') Password: 
-		input(type='text', name='password')
-		br
-		input(type='submit', value='Add Person')
-		div(id="signup")
-		h1
-		a(href="/create") Sign Up
+		form(id='form', method='post', action='/')
+			label(for='userName') UserName: 
+			input(type='text', name='name')
+			br
+			label(for='password') Password: 
+			input(type='text', name='password')
+			br
+			input(type='submit', value='Add Person')
+	
