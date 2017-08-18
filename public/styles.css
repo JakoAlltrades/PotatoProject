@@ -11,11 +11,16 @@
 #signin h1{
 	text-align: center;
 }
-#signin input {
-	margin:10px;
-	padding-left: 5px;
+#signin input{
+	margin: 10px;
 }
 #SignIn{
-	
-	float: left;
+	text-align: center;
+}
+body{
+	background: #bddfb3;
+	color: #2f2e2e;
+}
+h1{
+	color: #2f2e2e;
 }
