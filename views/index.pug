@@ -1,17 +1,17 @@
 extends layout
 
 block content
+	div(id="signup")
+		p
+			a(href="/create") Sign In
 	div(id='signin')
 		form(id='form', method='post', action='/')
 			h1 Sign in
-			label(for='userName') Username: 
+			label(for='userName' id='username') UserName: 
 			input(type='text', name='name')
 			br
 			label(for='password') Password: 
 			input(type='text', name='password')
 			br
 			input(type='submit', value='SignIn', id='SignIn')
-	div(id="signup")
-		p
-			a(href="/create") Sign In
 	
