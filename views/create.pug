@@ -1,6 +1,7 @@
 extends layout
 
 block content
+
   form(id='form', method='post', action='/create')
     label(for='userName') Name: 
     input(type='text', name='userName')
@@ -45,3 +46,4 @@ block content
 
     br
     input(type='submit', value='Add Person')
+

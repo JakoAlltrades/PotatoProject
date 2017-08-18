@@ -1,6 +1,9 @@
 extends layout
 
 block content
+	div(id="signup")
+		p
+			a(href="/create") Sign In
 	div(id='signin')
 		form(id='form', method='post', action='/')
 			h1 Sign in
@@ -11,7 +14,4 @@ block content
 			input(type='text', name='password')
 			br
 			input(type='submit', value='SignIn', id='SignIn')
-	div(id="signup")
-		p
-			a(href="/create") Sign In
 	
