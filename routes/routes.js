@@ -81,7 +81,7 @@ exports.createUser = function (req, res) {
     if (err) return console.error(err);
     console.log(user + ' added');
   });
-  //res.redirect('details');
+  res.redirect('details');
 };
 
 exports.edit = function (req, res) {
@@ -114,7 +114,7 @@ exports.editUser = function (req, res) {
 exports.details = function(req, res)
 {
     User.find(function(err, user){
-        console.log("User: " + user;
+        console.log("User: " + user);
         if(err) return console.error(err);
         res.render('details', {
             title:  "Detatils",
