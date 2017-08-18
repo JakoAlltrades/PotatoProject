@@ -1,18 +1,6 @@
 extends layout
 
 block content
-	div(id='signin')
-		form(id='form', method='post', action='/create')
-		label(for='name') Name: 
-		input(type='text', name='name')
-		br
-		label(for='age') Age: 
-		input(type='text', name='age')
-		br
-		label(for = 'description') Description:
-		input(type = 'text', name = 'description')
-		br
-		input(type='submit', value='Add Person' id='SignIn')
   form(id='form', method='post', action='/create')
     label(for='userName') Name: 
     input(type='text', name='userName')
