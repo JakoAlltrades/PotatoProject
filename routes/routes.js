@@ -19,7 +19,9 @@ var userSchema = mongoose.Schema({
     email: String,
     age: Number,
     isAdmin: Boolean,
-    userAnswer: [String]
+    userAnswer1: String,
+    userAnswer2: String,
+    userAnswer3: String
 });
 
 function makeHash(the_str) {
@@ -78,7 +80,9 @@ exports.createUser = function (req, res) {
     email: req.body.email,
     age: req.body.age,
     isAdmin: req.body.isAdmin,
-    userAnswer: [req.body.userAnswer1, req.body.userAnswer2, req.body.userAnswer3s]
+    userAnswer1: req.body.userAnswer1, 
+    userAnswer2: req.body.userAnswer2,
+    userAnswer3: req.body.userAnswer3
   });
   user.save(function (err, user) {
     if (err) return console.error(err);
@@ -124,10 +128,13 @@ exports.details = function(req, res)
         user.email = curUser.email;
         user.age = curUser.age;
         user.isAdmin = curUser.isAdmin;
+        user.userAnswer1 = curUser.userAnswer1;
+        user.userAnswer2 = curUser.userAnswer2;
+        user.userAnswer3 = curUser.userAnswer3;
         console.log("User: " + curUser);
         if(err) return console.error(err);
         res.render('details', {
-            title:  "Detatils",
+            title:  "Details",
             user: user
         });
         
