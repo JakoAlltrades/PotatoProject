@@ -7,6 +7,8 @@ mongoose.connect('mongodb://localhost/data', {
 var bcrypt = require('bcrypt-nodejs');
 var hash;
 
+var curUser;
+
 var mdb = mongoose.connection;
 mdb.on('error', console.error.bind(console, 'connection error:'));
 mdb.once('open', function(callback){});
@@ -75,12 +77,14 @@ exports.createUser = function (req, res) {
     password: makeHash(req.body.password),
     email: req.body.email,
     age: req.body.age,
-    isAdmin: req.body.isAdmin
+    isAdmin: req.body.isAdmin,
+    userAnswer: [req.body.userAnswer1, req.body.userAnswer2, req.body.userAnswer3s]
   });
   user.save(function (err, user) {
     if (err) return console.error(err);
     console.log(user + ' added');
   });
+  curUser = user;
   res.redirect('details');
 };
 
@@ -107,6 +111,7 @@ exports.editUser = function (req, res) {
       console.log(req.body.name + ' updated');
     });
   });
+  curUser = user;
   res.redirect('/');
 
 };
@@ -114,7 +119,12 @@ exports.editUser = function (req, res) {
 exports.details = function(req, res)
 {
     User.find(function(err, user){
-        console.log("User: " + user);
+        user.userName = curUser.userName;
+        user.password = curUser.password;
+        user.email = curUser.email;
+        user.age = curUser.age;
+        user.isAdmin = curUser.isAdmin;
+        console.log("User: " + curUser);
         if(err) return console.error(err);
         res.render('details', {
             title:  "Detatils",
