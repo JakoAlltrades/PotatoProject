@@ -2,13 +2,46 @@ extends layout
 
 block content
   form(id='form', method='post', action='/create')
-    label(for='name') Name: 
-    input(type='text', name='name')
+    label(for='userName') Name: 
+    input(type='text', name='userName')
+    br
+    label(for = 'password') Password:
+    input(type = 'password', name = 'password')
     br
     label(for='age') Age: 
     input(type='text', name='age')
     br
-    label(for = 'description') Description:
-    input(type = 'text', name = 'description')
+    label(for='email') Email Address: 
+    input(type='text', name='email')
+    br
+    label(for='userAnswer1') How do you like your potatoes prepared: 
+    select(id="userAnswer1", name="userAnswer1")
+        -for(var i = 0;i<1;i++){
+            option(value="#{i}") Boiled
+            option(value="#{i +1}") Fried
+            option(value="#{i + 2}") Mashed
+            option(value="#{i + 3}") Baked
+        -}
+    br
+    label(for='userAnswer2') Favorite Type of potatoe: 
+    select(id="userAnswer2", name="userAnswer2")
+        -for(var i = 0;i<1;i++){
+                option(value="#{i}") Sweet potatoes
+                option(value="#{i + 1}") Russet potatoes
+                option(value="#{i + 2}") Red potatoes
+                option(value="#{i + 3}") White potatoes
+        -}
+
+
+    br
+    label(for='userAnswer3') Favorite Type of fried potatoe: 
+    select(id="userAnswer3", name="userAnswer3")
+        -for(var i = 0;i<1;i++){
+            option(value="#{i}") French Fries
+            option(value="#{i + 1}") Tatter tots
+            option(value="#{i + 2}") Potato Wedges
+            option(value="#{i + 3}") Hash Browns
+        -}
+
     br
     input(type='submit', value='Add Person')
