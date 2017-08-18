@@ -3,6 +3,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/data', {
     useMongoClient: true
 });
+
 var bcrypt = require('bcrypt-nodejs');
 var hash;
 
@@ -29,6 +30,7 @@ function makeHash(the_str) {
 function compareHash(the_str, passHash)
 {
     bcrypt.compare(the_str, passash, function(err, res){
+        console.log(res);
         return res;
         //how to compare back to the orignal unsalted string
     });  
@@ -37,7 +39,7 @@ function compareHash(the_str, passHash)
 var User = mongoose.model('User_Collection', userSchema);
 
 exports.index = function (req,res){
-    User.find(function(err, person){
+    User.find(function(err, user){
         if(err) return console.error(err);
         res.render('index', {
             title: "Sign in"
@@ -77,9 +79,9 @@ exports.createUser = function (req, res) {
   });
   user.save(function (err, user) {
     if (err) return console.error(err);
-    console.log(req.body.userName + ' added');
+    console.log(user + ' added');
   });
-  res.redirect('details', {title: "Details"});
+  //res.redirect('details');
 };
 
 exports.edit = function (req, res) {
@@ -111,5 +113,13 @@ exports.editUser = function (req, res) {
 
 exports.details = function(req, res)
 {
-    
-};
+    User.find(function(err, user){
+        console.log("User: " + user;
+        if(err) return console.error(err);
+        res.render('details', {
+            title:  "Detatils",
+            user: user
+        });
+        
+});
+}
