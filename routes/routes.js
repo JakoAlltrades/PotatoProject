@@ -25,11 +25,9 @@ var userSchema = mongoose.Schema({
 });
 
 function makeHash(the_str) {
-    var hashedPass;
     bcrypt.hash(the_str, null, null, function(err, hash){
-        hashedPass = showHash(hash);
-        console.log("hashedPass: " + hashedPass)
-        return hashedPass;
+    showHash(hash);
+    return hash;
         //how to compare back to the orignal unsalted string
      });
 }
@@ -88,11 +86,9 @@ exports.create = function (req, res) {
 };
 
 exports.createUser = function (req, res) {
-    var pass = makeHash(req.body.password);
-    console.log(pass);
     var user = new User({
     userName: req.body.userName,
-    password: pass,
+    password: req.body.password,
     email: req.body.email,
     age: req.body.age,
     isAdmin: false,
@@ -100,6 +96,9 @@ exports.createUser = function (req, res) {
     userAnswer2: req.body.userAnswer2,
     userAnswer3: req.body.userAnswer3
   });
+    console.log("Password pre hash:",user.password);
+    user.password = makeHash(user.password);
+    console.log("Password Post hash:",user.password);
   user.save(function (err, user) {
     if (err) return console.error(err);
       console.log("User: " + user);
