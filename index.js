@@ -13,15 +13,16 @@ app.set('views', __dirname + '/views');
 
 app.use(express.static(path.join(__dirname + '/public')));
 
+
 var urlencodedParser = bodyParser.urlencoded({
   extended: true
 })
 
 app.get('/', route.index);
-app.post('/', route.signInPost);
 app.get('/details', route.details);
 app.get('/create', route.create);
 app.get('/edit/:id', route.edit);
+app.post('/', urlencodedParser, route.signIn);
 app.post('/create', urlencodedParser, route.createUser);
 app.post('/edit/:id', urlencodedParser, route.editUser);
  

@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/data', {
 });
 
 var bcrypt = require('bcrypt-nodejs');
-var hash;
+var hashed;
 
 var curUser;
 
@@ -25,15 +25,23 @@ var userSchema = mongoose.Schema({
 });
 
 function makeHash(the_str) {
+    var hashedPass;
     bcrypt.hash(the_str, null, null, function(err, hash){
+        hashedPass = showHash(hash);
+        console.log("hashedPass: " + hashedPass)
+        return hashedPass;
         //how to compare back to the orignal unsalted string
-    });
-    return hash;  
+     });
+}
+
+function showHash(hash){
+    console.log("hash: " + hash);
+    return hash;
 }
 
 function compareHash(the_str, passHash)
 {
-    bcrypt.compare(the_str, passash, function(err, res){
+    bcrypt.compare(the_str, passHash, function(err, res){
         console.log(res);
         return res;
         //how to compare back to the orignal unsalted string
@@ -51,18 +59,24 @@ exports.index = function (req,res){
     });
 };
 
-exports.signInPost = function(req,res)
+exports.signIn = function(req,res)
 {
-    var userName = req.body.userName;
-    var password = req.body.password;
-    User.findById(req.params.id, function(err, user){
+    var tempUser = new User({
+        userName: req.body.userName,
+        password: req.body.password
+    })
+    console.log("userName: " + tempUser.userName +", enteredPass: " + tempUser.password);
+    User.findOne({userName: new RegExp('^'+tempUser.userName+'$', 'i') }, function(err, user){
         if(err) return console.error(err);
-        if(user.userName.equals(userName))
+        console.log(user);
+        console.log("password: " + user.password);
+        if(user.userName === tempUser.userName)
             {
-                if(compareHash(password, user.password))
-                    {
-                        res.render('details', {title: "Details"});
-                    }
+                //if(compareHash(tempUser.password, user.password))
+                    //{
+                        curUser = user;
+                        res.redirect('details');
+                    //}
             }
     })
 }
@@ -74,18 +88,21 @@ exports.create = function (req, res) {
 };
 
 exports.createUser = function (req, res) {
-  var user = new User({
+    var pass = makeHash(req.body.password);
+    console.log(pass);
+    var user = new User({
     userName: req.body.userName,
-    password: makeHash(req.body.password),
+    password: pass,
     email: req.body.email,
     age: req.body.age,
-    isAdmin: req.body.isAdmin,
+    isAdmin: false,
     userAnswer1: req.body.userAnswer1, 
     userAnswer2: req.body.userAnswer2,
     userAnswer3: req.body.userAnswer3
   });
   user.save(function (err, user) {
     if (err) return console.error(err);
+      console.log("User: " + user);
     console.log(user + ' added');
   });
   curUser = user;
@@ -131,7 +148,7 @@ exports.details = function(req, res)
         user.userAnswer1 = curUser.userAnswer1;
         user.userAnswer2 = curUser.userAnswer2;
         user.userAnswer3 = curUser.userAnswer3;
-        console.log("User: " + curUser);
+        
         if(err) return console.error(err);
         res.render('details', {
             title:  "Details",
