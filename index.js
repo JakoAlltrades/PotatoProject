@@ -22,6 +22,7 @@ app.get('/', route.index);
 app.get('/details', route.details);
 app.get('/create', route.create);
 app.get('/edit/:id', route.edit);
+app.get("/admin", route.admin)
 app.post('/', urlencodedParser, route.signIn);
 app.post('/create', urlencodedParser, route.createUser);
 app.post('/edit/:id', urlencodedParser, route.editUser);

@@ -5,7 +5,7 @@ mongoose.connect('mongodb://localhost/data', {
 });
 
 var bcrypt = require('bcrypt-nodejs');
-var hashed;
+//var hashed;
 
 var curUser;
 
@@ -24,17 +24,20 @@ var userSchema = mongoose.Schema({
     userAnswer3: String
 });
 
-function makeHash(the_str) {
+function makeHash(the_str,hashed) {
     bcrypt.hash(the_str, null, null, function(err, hash){
-    showHash(hash);
-    return hash;
+    //showHash(hash);
+    hashed = hash
+    console.log('log in the makehash', hashed);
+    return hashed;
+   
         //how to compare back to the orignal unsalted string
      });
 }
 
 function showHash(hash){
-    console.log("hash: " + hash);
-    return hash;
+    hashed = hash;
+    console.log("hash: " + hashed);
 }
 
 function compareHash(the_str, passHash)
@@ -57,27 +60,45 @@ exports.index = function (req,res){
     });
 };
 
+exports.admin = function(req,res)
+{
+    User.find(function (err, user) {
+    if (err) return console.error(err);
+    res.render('admin', {
+      title: 'User List',
+      users: user,
+        user: curUser 
+    });
+  });
+}
+
 exports.signIn = function(req,res)
 {
     var tempUser = new User({
         userName: req.body.userName,
         password: req.body.password
     })
-    console.log("userName: " + tempUser.userName +", enteredPass: " + tempUser.password);
+    console.log("userName: ", tempUser.userName,", enteredPass: ", tempUser.password);
     User.findOne({userName: new RegExp('^'+tempUser.userName+'$', 'i') }, function(err, user){
         if(err) return console.error(err);
         console.log(user);
-        console.log("password: " + user.password);
+        console.log("password: ", user.password);
         if(user.userName === tempUser.userName)
             {
                 //if(compareHash(tempUser.password, user.password))
                     //{
                         curUser = user;
-                        res.redirect('details');
+                        if(user.isAdmin === false)
+                        {
+                            res.redirect('details');
+                        }
+                        else{
+                            res.redirect("admin");
+                        }
                     //}
             }
-    })
-}
+    });
+};
 
 exports.create = function (req, res) {
   res.render('create', {
@@ -86,9 +107,15 @@ exports.create = function (req, res) {
 };
 
 exports.createUser = function (req, res) {
+    //console.log("hashed: ", hashed);
+    var hashPass = "";
+   var sauce =  makeHash(req.body.password, hashPass);
+    console.log("sauce:",sauce);
+    //console.log("hashed hash: ", hashed);
+   // console.log("create check:",req.body.password);
     var user = new User({
     userName: req.body.userName,
-    password: req.body.password,
+    password: sauce,
     email: req.body.email,
     age: req.body.age,
     isAdmin: false,
@@ -96,16 +123,23 @@ exports.createUser = function (req, res) {
     userAnswer2: req.body.userAnswer2,
     userAnswer3: req.body.userAnswer3
   });
-    console.log("Password pre hash:",user.password);
-    user.password = makeHash(user.password);
-    console.log("Password Post hash:",user.password);
+    //console.log("Password pre hash:",user.password);
+    //user.password = makeHash(user.password);
+    //console.log("Password Post hash:",user.password);
   user.save(function (err, user) {
     if (err) return console.error(err);
       console.log("User: " + user);
     console.log(user + ' added');
   });
   curUser = user;
-  res.redirect('details');
+    if(user.isAdmin === false)
+        {
+             res.redirect('details');
+        }
+    else{
+        res.redirect("admin");
+    }
+ 
 };
 
 exports.edit = function (req, res) {

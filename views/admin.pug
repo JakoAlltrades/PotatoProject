@@ -8,11 +8,11 @@ block content
       th Age
       th 
       th 
-    each item in people
+    each item in users
       tr
         td
           a(href='/details/' + item.id) #{item.id}
-        td #{item.name}
+        td #{item.userName}
         td #{item.age}
         td
           a(href='/edit/' + item.id) Edit
