@@ -185,4 +185,5 @@ function BarGraph(ctx) {
 	  }
 	}; 
 }
-BarGraph("canvasId");
+var graph = BarGraph(cxt);
+graph.draw();
