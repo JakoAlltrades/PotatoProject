@@ -21,7 +21,7 @@
 	margin-right:5px;
 	
 }
-#SignIn{
+input{
 width: 20em;  
 height: 2em;
 }
@@ -32,8 +32,9 @@ body{
 h1{
 	color: #2f2e2e;
 }
-#username input{
-	margin-left: 10px;
+label {
+	display: block;
+	width: 100px;
 }
 #stuff{
 	color:aqua;
