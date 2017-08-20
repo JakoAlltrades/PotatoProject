@@ -109,7 +109,7 @@ exports.create = function (req, res) {
 exports.createUser = function (req, res) {
     //console.log("hashed: ", hashed);
     var hashPass = "";
-   var sauce =  makeHash(req.body.password, hashPass);
+    var sauce =  makeHash(req.body.password, hashPass);
     console.log("sauce:",sauce);
     //console.log("hashed hash: ", hashed);
    // console.log("create check:",req.body.password);
@@ -156,17 +156,20 @@ exports.editUser = function (req, res) {
   User.findById(req.params.id, function (err, user) {
     if (err) return console.error(err);
     user.userName = req.body.userName;
-    user.password = makeHash(req.body.password);
+    user.password = req.body.password;
     user.email = req.body.email;
     user.age = req.body.age;
     user.isAdmin = req.body.isAdmin;
-    person.save(function (err, person) {
+    user.userAnswer1 = req.body.userAnswer1;
+    user.userAnswer2 = req.body.userAnswer2;
+    user.userAnswer3 = req.body.userAnswer3;
+    user.save(function (err, user) {
       if (err) return console.error(err);
-      console.log(req.body.name + ' updated');
+      console.log(req.body.userName + ' updated');
     });
   });
-  curUser = user;
-  res.redirect('/');
+  //curUser = user;
+  res.redirect('/admin');
 
 };
 
