@@ -1,22 +1,18 @@
 extends layout
 
 block content
-  p(id=boiled) #{boiledNum}
-  p(id=baked) #{bakedNum}
-  p(id=mashed) #{mashedNum}
-  p(id=fried) #{friedNum}
-  p(id=sweet) #{sweetNum}
-  p(id=russet) #{russetNum}
-  p(id=white) #{whiteNum}
-  p(id=red) #{redNum}
-  p(id=sweet) #{sweetNum}
-  p(id=russet) #{russetNum}
-  p(id=white) #{whiteNum}
-  p(id=red) #{redNum}
-  p(id=fries) #{friesNum}
-  p(id=tots) #{totsNum}
-  p(id=wedges) #{wedgeNum}
-  p(id=red) #{redNum}
+  p(id=boiled class='answers') #{boiledNum}
+  p(id=baked class='answers') #{bakedNum}
+  p(id=mashed class='answers') #{mashedNum}
+  p(id=fried class='answers') #{friedNum}
+  p(id=sweet class='answers') #{sweetNum}
+  p(id=russet class='answers') #{russetNum}
+  p(id=white class='answers') #{whiteNum}
+  p(id=red class='answers') #{redNum}
+  p(id=fries class='answers') #{friesNum}
+  p(id=tots class='answers') #{totsNum}
+  p(id=wedges class='answers') #{wedgeNum}
+  p(id=red class='answers') #{redNum}
   
   p Username: #{user.userName}
   p Age: #{user.age}
