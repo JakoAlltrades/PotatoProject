@@ -87,7 +87,10 @@ exports.signIn = function(req,res)
             {
                 //if(compareHash(tempUser.password, user.password))
                     //{
+                        console.log("id: ", user.id);
                         curUser = user;
+                        curUser.id = user.id;
+                console.log("curUser id: ", curUser.id);
                         if(user.isAdmin === false)
                         {
                             res.redirect('details');
@@ -260,7 +263,8 @@ exports.details = function(req, res)
         user.userAnswer1 = curUser.userAnswer1;
         user.userAnswer2 = curUser.userAnswer2;
         user.userAnswer3 = curUser.userAnswer3;
-        
+        user.id =curUser.id;
+        console.log("details userid: ", user.id);
         if(err) return console.error(err);
         res.render('details', {
             title:  "Details",

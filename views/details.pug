@@ -15,6 +15,7 @@ block content
   p(id=wedges class='answers') #{wedgeNum}
   p(id=hashed class='answers') #{hashNum}
   
+  p id: #{user.id}
   p Username: #{user.userName}
   p Age: #{user.age}
   p Email: #{user.email}
@@ -31,4 +32,7 @@ block content
   canvas(id="canvasthree")
   script(src="/barGraphThree.js")
   #menu
+    a(href='/edit/' + user.id) Edit
+    break
     a(href='/') Go back
+    
