@@ -1,0 +1,44 @@
+extends layout
+
+block content
+  form(id='form', method='post', action='/edit/' + user.id)
+    label(for='name') Name: 
+    input(type='text', name='userName' value=user.userName)
+    br
+    label(for='age') Password: 
+    input(type='text', name='password' value=user.password)
+    br
+    label(for = 'gender') Email:
+    input(type = 'text', name ='email' value=user.email)
+    br
+    label(for = 'description') Age:
+    input(type = 'text', name ='age' value=user.age)
+    br
+    label(for='userAnswer1') How do you like your potatoes prepared:
+    select(name='userAnswer1')
+      option(selected = user.userAnswer1) #{user.userAnswer1}
+
+      option(value="Boiled") Boiled
+      option(value="Fried") Fried
+      option(value="Mashed") Mashed
+      option(value="Baked") Baked
+    br
+    label(for='userAnswer2') Favorite Type of Potatoe:
+    select(name='userAnswer2')
+      option(selected = user.userAnswer2) #{user.userAnswer2}
+
+      option(value="Sweet potatoes") Sweet potatoes
+      option(value="Russet potatoes") Russet potatoes
+      option(value="Red potatoes") Red potatoes
+      option(value="White potatoes") White potatoes
+    br
+    label(for='userAnswer3') Favorite Type of Potatoe:
+    select(name='userAnswer3')
+      option(selected = user.userAnswer3) #{user.userAnswer3}
+
+      option(value="French Fries") French Fries
+      option(value="Tatter tots") Tatter tots
+      option(value="Potato Wedges") Potato Wedges
+      option(value="Hash Browns") Hash Browns
+    br
+    input(type='submit', value='Update User')
