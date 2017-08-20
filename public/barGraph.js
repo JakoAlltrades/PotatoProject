@@ -1,4 +1,8 @@
 var myCanvas = document.getElementById("myCanvas");
+var boiled = document.getElementById("boiled");
+var baked = document.getElementById("baked");
+var mashed = document.getElementById("mashed");
+var fried = document.getElementById("fried");
 myCanvas.width = 300;
 myCanvas.height = 300;
    
@@ -22,10 +26,10 @@ function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
 }
  
 var myVinyls = {
-    "Classical music": 10,
-    "Alternative rock": 14,
-    "Pop": 2,
-    "Jazz": 12
+    "Boiled": boiled,
+    "Baked": baked,
+    "Mashed": mashed,
+    "Fried": fried
 };
  
 var Barchart = function(options){
