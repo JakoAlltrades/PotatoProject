@@ -2,37 +2,38 @@ extends layout
 
 block content
 
-  p(id=boiled class='answers') #{boiledNum}
-  p(id=baked class='answers') #{bakedNum}
-  p(id=mashed class='answers') #{mashedNum}
-  p(id=fried class='answers') #{friedNum}
-  p(id=sweet class='answers') #{sweetNum}
-  p(id=russet class='answers') #{russetNum}
-  p(id=white class='answers') #{whiteNum}
-  p(id=red class='answers') #{redNum}
-  p(id=fries class='answers') #{friesNum}
-  p(id=tots class='answers') #{totsNum}
-  p(id=wedges class='answers') #{wedgeNum}
-  p(id=hashed class='answers') #{hashNum}
+  div(id='signin' class='detail')
+   p(id=boiled class='answers') #{boiledNum}
+   p(id=baked class='answers') #{bakedNum}
+   p(id=mashed class='answers') #{mashedNum}
+   p(id=fried class='answers') #{friedNum}
+   p(id=sweet class='answers') #{sweetNum}
+   p(id=russet class='answers') #{russetNum}
+   p(id=white class='answers') #{whiteNum}
+   p(id=red class='answers') #{redNum}
+   p(id=fries class='answers') #{friesNum}
+   p(id=tots class='answers') #{totsNum}
+   p(id=wedges class='answers') #{wedgeNum}
+   p(id=hashed class='answers') #{hashNum}
   
-  p id: #{user.id}
-  p Username: #{user.userName}
-  p Age: #{user.age}
-  p Email: #{user.email}
-  p Answer 1: #{user.userAnswer1}
-  p Answer 2: #{user.userAnswer2}
-  p Answer 3: #{user.userAnswer3}
-  br
-  canvas(id="myCanvas")
-  script(src="/barGraph.js")
-  br
-  canvas(id="canvastwo")
-  script(src="/barGraphTwo.js")
-  br
-  canvas(id="canvasthree")
-  script(src="/barGraphThree.js")
-  #menu
-    a(href='/edit/' + user.id) Edit
-    break
-    a(href='/') Go back
-    
+   p id: #{user.id}
+   p Username: #{user.userName}
+   p Age: #{user.age}
+   p Email: #{user.email}
+   p Answer 1: #{user.userAnswer1}
+   p Answer 2: #{user.userAnswer2}
+   p Answer 3: #{user.userAnswer3}
+   div(id="graphBox")
+    br
+    canvas(id="myCanvas")
+    script(src="/barGraph.js")
+    br
+    canvas(id="canvastwo")
+    script(src="/barGraphTwo.js")
+    br
+    canvas(id="canvasthree")
+    script(src="/barGraphThree.js")
+    #menu
+      a(href='/edit/' + user.id) Edit
+      br
+      a(href='/') Go back

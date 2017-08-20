@@ -12,7 +12,6 @@
 	margin-right: auto;
 }
 #signin h1{
-	text-align: center;
 }
 #signin input{
 	
@@ -41,4 +40,11 @@ label {
 }
 .answers{
 	visibility: hidden;
+}
+#graphBox{
+	float: left;
+}
+.detail p{
+font-size: 32px;
+color: #2f2e2e;
 }
