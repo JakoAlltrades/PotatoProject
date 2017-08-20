@@ -17,7 +17,7 @@ function drawLine(ctx, startX, startY, endX, endY,color){
     ctx.stroke();
     ctx.restore();
 }
- 
+ //do not ovetrrid thesre files please
 function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
     ctx.save();
     ctx.fillStyle=color;
