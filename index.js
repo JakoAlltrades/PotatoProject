@@ -2,7 +2,9 @@ var express = require('express'),
   pug = require('pug'),
   path = require('path'),
   route = require('./routes/routes.js'),
-  bodyParser = require('body-parser');
+  bodyParser = require('body-parser'),
+  cookieParser = require('cookie-parser'),
+  expressSession = require('express-session');
 
 
 var app = express();
@@ -11,12 +13,15 @@ var app = express();
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/views');
 
+
+app.use(cookieParser());
+app.use(expressSession({secret:'uh potatoes', saveUninitialized: true, resave: true}));
 app.use(express.static(path.join(__dirname + '/public')));
 
 
 var urlencodedParser = bodyParser.urlencoded({
   extended: true
-})
+});
 
 app.get('/', route.index);
 app.get('/details', route.details);

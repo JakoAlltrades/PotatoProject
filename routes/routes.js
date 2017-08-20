@@ -52,6 +52,8 @@ function compareHash(the_str, passHash)
 var User = mongoose.model('User_Collection', userSchema);
 
 exports.index = function (req,res){
+    //req.session.name = null;
+    req.sesion = null;
     User.find(function(err, user){
         if(err) return console.error(err);
         res.render('index', {
@@ -162,24 +164,30 @@ exports.editUser = function (req, res) {
     user.password = req.body.password;
     user.email = req.body.email;
     user.age = req.body.age;
-    user.isAdmin = req.body.isAdmin;
     user.userAnswer1 = req.body.userAnswer1;
     user.userAnswer2 = req.body.userAnswer2;
     user.userAnswer3 = req.body.userAnswer3;
     user.save(function (err, user) {
       if (err) return console.error(err);
       console.log(req.body.userName + ' updated');
+        curUser = user;
     });
   });
   //curUser = user;
+    if(curUser.isAdmin == true)
+{
   res.redirect('/admin');
+}
+    else{
+        res.redirect('details');
+    }
 
 };
 
 exports.delete = function (req, res) {
   User.findByIdAndRemove(req.params.id, function (err, user) {
     if (err) return console.error(err);
-    res.redirect('/');
+    res.redirect('admin');
   });
 };
 
@@ -264,6 +272,9 @@ exports.details = function(req, res)
         user.userAnswer2 = curUser.userAnswer2;
         user.userAnswer3 = curUser.userAnswer3;
         user.id =curUser.id;
+        req.session.name = req.session.name || user.id;
+                        console.log("sesson name: ", req.session.name);
+                        console.log("sesson id: ", req.session.id);
         console.log("details userid: ", user.id);
         if(err) return console.error(err);
         res.render('details', {
