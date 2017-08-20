@@ -193,21 +193,71 @@ exports.details = function(req, res)
         res.render('details', {
             title:  "Details",
             user: user,
-            boiledNum: 20,
+            boiledNum: countAnswerOne('Boiled'),
+            bakedNum: countAnswerOne('Baked'),
+            MashedNum: countAnswerOne('Mashed'),
+            friedNum: countAnswerOne('Fried'),
+            sweetNum: countAnswerTwo("Sweet potatoes"),
+            russetNum: countAnswerTwo("Russet potatoes"),
+            redNum: countAnswerTwo("Red potatoes"),
+            whiteNum: countAnswerTwo("White potatoes"),
+            friesNum: countAnswerThree("French Fries"),
+            totsNum: countAnswerThree("Tatter tots"),
+            wedgeNum: countAnswerThree("Potato Wedges"),
+            hashNum: countAnswerThree("Hash Browns")
         });
         
 });
 }
 
 
-function countString(collection)
+function countAnswerOne(collection)
 {
     var count = 0;
-    U.find(function (err, user) {
+    console.log("word: ", collection );
+    User.find(function (err, user) {
     if (err) return console.error(err);
         for(var j = 0; j < user.length; j++)
             {
-                if(user[j].userAnswer1 === collection)
+                console.log("Answer1: ",user[j].userAnswer1);
+                if(user[j].userAnswer1.prototype.toLowerCase == collection.toLowerCase)
+                    {
+                       count++; 
+                    }
+            }
+    });
+    return count;
+}
+
+function countAnswerTwo(collection)
+{
+    var count = 0;
+    console.log("word: ", collection );
+    User.find(function (err, user) {
+    if (err) return console.error(err);
+        for(var j = 0; j < user.length; j++)
+            {
+                console.log("Answer2: ",user[j].userAnswer2);
+                if(user[j].userAnswer2.prototype.toLowerCase == collection.toLowerCase)
+                    {
+                       count++; 
+                    }
+            }
+    });
+    return count;
+}
+
+function countAnswerThree(collection)
+{
+    var count = 0;
+    console.log("word: ", collection );
+    User.find(function (err, user) {
+    if (err) return console.error(err);
+        console.log("user length", user.length);
+        for(var j = 0; j < user.length; j++)
+            {
+                console.log("Answer3: ",user[j].userAnswer3);
+                if(user[j].userAnswer3.prototype.toLowerCase == collection.toLowerCase)
                     {
                        count++; 
                     }
