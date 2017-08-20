@@ -170,6 +170,13 @@ exports.editUser = function (req, res) {
 
 };
 
+exports.delete = function (req, res) {
+  User.findByIdAndRemove(req.params.id, function (err, user) {
+    if (err) return console.error(err);
+    res.redirect('/');
+  });
+};
+
 exports.details = function(req, res)
 {
     User.find(function(err, user){
@@ -185,8 +192,26 @@ exports.details = function(req, res)
         if(err) return console.error(err);
         res.render('details', {
             title:  "Details",
-            user: user
+            user: user,
+            boiledNum: 20,
         });
         
 });
+}
+
+
+function countString(collection)
+{
+    var count = 0;
+    U.find(function (err, user) {
+    if (err) return console.error(err);
+        for(var j = 0; j < user.length; j++)
+            {
+                if(user[j].userAnswer1 === collection)
+                    {
+                       count++; 
+                    }
+            }
+    });
+    return count;
 }
