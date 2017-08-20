@@ -1,8 +1,4 @@
 var myCanvas = document.getElementById("canvastwo");
-var sweet = document.getElementById("sweet");
-var russet = document.getElementById("russet");
-var white = document.getElementById("white");
-var red = document.getElementById("red");
 myCanvas.width = 300;
 myCanvas.height = 300;
    
@@ -26,10 +22,10 @@ function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
 }
  
 var myVinyls = {
-    "Sweet": sweet,
-    "Russet": russet,
-    "White": white,
-    "Red": red
+    "Classical music": 10,
+    "Alternative rock": 14,
+    "Pop": 2,
+    "Jazz": 12
 };
  
 var Barchart = function(options){

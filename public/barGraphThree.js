@@ -1,8 +1,4 @@
 var myCanvas = document.getElementById("canvasthree");
-var fries = document.getElementById("fries");
-var tots = document.getElementById("tots");
-var wedges = document.getElementById("wedges");
-var hash = document.getElementById("hashed");
 myCanvas.width = 300;
 myCanvas.height = 300;
    
@@ -26,10 +22,10 @@ function drawBar(ctx, upperLeftCornerX, upperLeftCornerY, width, height,color){
 }
  
 var myVinyls = {
-    "Fries": fries,
-    "Tots": tots,
-    "Wedges":	wedges,
-    "Hash": hash
+    "Classical music": 10,
+    "Alternative rock": 14,
+    "Pop": 2,
+    "Jazz": 12
 };
  
 var Barchart = function(options){
